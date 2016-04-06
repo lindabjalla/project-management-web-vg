@@ -22,7 +22,7 @@ abstract class AbstractEntity
 		this.id = id;
 	}
 
-	String getControlId()
+	public String getControlId()
 	{
 		return controlId;
 	}
