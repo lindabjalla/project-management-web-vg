@@ -22,10 +22,10 @@ public class TeamData extends AbstractEntityData
 
 	protected TeamData() {}
 
-	public TeamData(final String name)
+	public TeamData(final String name, final TeamStatus status)
 	{
 		this.name = name;
-		status = TeamStatus.ACTIVE;
+		this.status = status;
 		users = new HashSet<>();
 	}
 

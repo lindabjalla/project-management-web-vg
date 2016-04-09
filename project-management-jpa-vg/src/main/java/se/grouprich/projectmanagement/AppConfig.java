@@ -28,6 +28,7 @@ public class AppConfig
 		config.setJdbcUrl("jdbc:mysql://localhost:3306/ProjectManagement_Database");
 		config.setUsername("root");
 		config.setPassword("root");
+		config.addDataSourceProperty("characterEncoding", "utf8");
 
 		return new HikariDataSource(config);
 	}

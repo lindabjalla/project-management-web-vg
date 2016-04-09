@@ -2,18 +2,22 @@ package se.grouprich.projectmanagement.model;
 
 import se.grouprich.projectmanagement.status.TeamStatus;
 
+import java.util.Set;
+
 public final class Team extends AbstractEntity
 {
 	private String name;
 	private TeamStatus status;
+	private Set<Long> userIds;
 
 	public Team() {}
 
-	public Team(final Long id, final String controlId, final String name, final TeamStatus status)
+	public Team(final Long id, final String controlId, final String name, final TeamStatus status, final Set<Long> userIds)
 	{
 		super(id);
 		this.name = name;
 		this.status = status;
+		this.userIds = userIds;
 	}
 
 	public String getName()
@@ -26,6 +30,11 @@ public final class Team extends AbstractEntity
 		return status;
 	}
 
+	public Set<Long> getUserIds()
+	{
+		return userIds;
+	}
+
 	public void setName(final String name)
 	{
 		this.name = name;
@@ -34,6 +43,11 @@ public final class Team extends AbstractEntity
 	public void setStatus(final TeamStatus status)
 	{
 		this.status = status;
+	}
+
+	public void setUserIds(Set<Long> userIds)
+	{
+		this.userIds = userIds;
 	}
 
 	@Override

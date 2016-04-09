@@ -3,25 +3,21 @@ package se.grouprich.projectmanagement.model.mapper;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import se.grouprich.projectmanagement.Loader;
 import se.grouprich.projectmanagement.model.Team;
 import se.grouprich.projectmanagement.model.TeamData;
-import se.grouprich.projectmanagement.service.TeamService;
 
 import javax.ws.rs.core.GenericEntity;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public final class TeamMapper
 {
 	private final MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 	private final MapperFacade mapper = mapperFactory.getMapperFacade();
-	private final static TeamService teamService = Loader.getBean(TeamService.class);
 
 	public TeamMapper()
 	{
-		mapperFactory.classMap(Team.class, TeamData.class).byDefault().register();
+		mapperFactory.classMap(Team.class, TeamData.class).fieldBToA("users{id}", "userIds{}").byDefault().register();
 	}
 
 	public TeamData convertTeamToTeamData(final Team team)
@@ -40,9 +36,9 @@ public final class TeamMapper
 		return teamData;
 	}
 
-	public GenericEntity<Collection<Team>> convertList(final List<TeamData> teamDataList)
+	public GenericEntity<Collection<Team>> convertList(final Collection<TeamData> teamDataList)
 	{
-		List<Team> teams = new ArrayList<>();
+		Collection<Team> teams = new ArrayList<>();
 		teamDataList.forEach(teamData -> teams.add(convertTeamDataToTeam(teamData)));
 
 		return new GenericEntity<Collection<Team>>(teams){};

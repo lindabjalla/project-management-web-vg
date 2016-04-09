@@ -5,20 +5,20 @@ import se.grouprich.projectmanagement.status.WorkItemStatus;
 public final class WorkItem extends AbstractEntity
 {
 	private String title;
-	private User user;
 	private String description;
 	private WorkItemStatus status;
+	private User user;
 
 	public WorkItem() {}
 
-	public WorkItem(final Long id, final String controlId, final String title, final User user, final String description,
-			final WorkItemStatus status)
+	public WorkItem(final Long id, final String controlId, final String title, final String description, final WorkItemStatus status,
+			final User user)
 	{
 		super(id);
 		this.title = title;
-		this.user = user;
 		this.description = description;
 		this.status = status;
+		this.user = user;
 	}
 
 	public String getTitle()

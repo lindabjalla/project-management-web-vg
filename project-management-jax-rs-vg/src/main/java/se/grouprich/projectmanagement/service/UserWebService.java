@@ -8,12 +8,12 @@ import se.grouprich.projectmanagement.model.TeamData;
 import se.grouprich.projectmanagement.model.User;
 import se.grouprich.projectmanagement.model.UserData;
 import se.grouprich.projectmanagement.model.mapper.UserMapper;
+import se.grouprich.projectmanagement.status.UserStatus;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.Collection;
-import java.util.List;
 
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +30,7 @@ public final class UserWebService
 	@POST
 	public Response createUser(final User user) throws InvalidValueException, RepositoryException
 	{
+		user.setStatus(UserStatus.ACTIVE);
 		final UserData userData = userMapper.convertUserToUserData(user);
 		final UserData createdUser = userService.createOrUpdate(userData);
 		final URI location = uriInfo.getAbsolutePathBuilder().path(getClass(), "getUser").build(createdUser.getId());
@@ -81,7 +82,7 @@ public final class UserWebService
 	public Response searchUsersByFirstNameOrLastNameOrUsername(@QueryParam("first-name") final String firstName, @QueryParam("last-name") String lastName,
 			@QueryParam("username") String username) throws RepositoryException
 	{
-		final List<UserData> userDataList = userService.searchUsersByFirstNameOrLastNameOrUsername(firstName, lastName, username);
+		final Collection<UserData> userDataList = userService.searchUsersByFirstNameOrLastNameOrUsername(firstName, lastName, username);
 		final GenericEntity<Collection<User>> users = userMapper.convertList(userDataList);
 
 		return Response.ok(users).build();
@@ -91,7 +92,7 @@ public final class UserWebService
 	public Response getAllUsers() throws RepositoryException
 	{
 		final Iterable<UserData> userDataIterable = userService.findAll();
-		final List<UserData> userDataList = Lists.newArrayList(userDataIterable);
+		final Collection<UserData> userDataList = Lists.newArrayList(userDataIterable);
 		final GenericEntity<Collection<User>> users = userMapper.convertList(userDataList);
 
 		return Response.ok(users).build();
@@ -102,7 +103,7 @@ public final class UserWebService
 	public Response getUsersByTeam(@PathParam("teamId") final Long teamId) throws RepositoryException
 	{
 		final TeamData teamData = teamService.findById(teamId);
-		final List<UserData> userDataList = userService.findByTeam(teamData);
+		final Collection<UserData> userDataList = userService.findByTeam(teamData);
 		final GenericEntity<Collection<User>> users = userMapper.convertList(userDataList);
 
 		return Response.ok(users).build();

@@ -15,7 +15,6 @@ import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Path("/issue")
@@ -88,7 +87,7 @@ public class IssueWebService
 	public Response getWorkItemsWithIssue() throws RepositoryException
 	{
 		final Set<WorkItemData> workItemDataSet = issueService.fetchWorkItemsHavingIssue();
-		final List<WorkItemData> workItemDataList = new ArrayList<>(workItemDataSet);
+		final Collection<WorkItemData> workItemDataList = new ArrayList<>(workItemDataSet);
 		final GenericEntity<Collection<WorkItem>> workItems = workItemMapper.convertList(workItemDataList);
 
 		return Response.ok(workItems).build();

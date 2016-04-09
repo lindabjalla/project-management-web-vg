@@ -8,12 +8,12 @@ import se.grouprich.projectmanagement.model.Team;
 import se.grouprich.projectmanagement.model.TeamData;
 import se.grouprich.projectmanagement.model.UserData;
 import se.grouprich.projectmanagement.model.mapper.TeamMapper;
+import se.grouprich.projectmanagement.status.TeamStatus;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.Collection;
-import java.util.List;
 
 @Path("/team")
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +30,7 @@ public class TeamWebService
 	@POST
 	public Response createTeam(final Team team) throws InvalidValueException
 	{
+		team.setStatus(TeamStatus.ACTIVE);
 		final TeamData teamData = teamMapper.convertTeamToTeamData(team);
 		final TeamData createdTeam = teamService.createOrUpdate(teamData);
 		final URI location = uriInfo.getAbsolutePathBuilder().path(getClass(), "getTeam").build(createdTeam.getId());
@@ -70,7 +71,7 @@ public class TeamWebService
 	public Response getAllTeams() throws RepositoryException
 	{
 		final Iterable<TeamData> teamDataIterable = teamService.findAll();
-		final List<TeamData> teamDataList = Lists.newArrayList(teamDataIterable);
+		final Collection<TeamData> teamDataList = Lists.newArrayList(teamDataIterable);
 		final GenericEntity<Collection<Team>> teams = teamMapper.convertList(teamDataList);
 
 		return Response.ok(teams).build();

@@ -29,13 +29,13 @@ public class UserData extends AbstractEntityData
 
 	protected UserData() {}
 
-	public UserData(final String username, final String password, final String firstName, final String lastName)
+	public UserData(final String username, final String password, final String firstName, final String lastName, final UserStatus status)
 	{
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		status = UserStatus.ACTIVE;
+		this.status = status;
 	}
 
 	public String getUsername()
