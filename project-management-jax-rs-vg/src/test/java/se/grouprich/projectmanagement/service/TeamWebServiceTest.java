@@ -34,8 +34,8 @@ public final class TeamWebServiceTest extends JerseyTest
 	@Override
 	protected Application configure()
 	{
-		final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Loader.class);
-		return new ResourceConfig().packages("se.grouprich.projectmanagement").property("contextConfig", context);
+		return new ResourceConfig().packages("se.grouprich.projectmanagement")
+				.property("contextConfig", new AnnotationConfigApplicationContext(Loader.class));
 	}
 
 	@Before
