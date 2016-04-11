@@ -57,9 +57,10 @@ public final class WorkItem extends AbstractEntity
 		this.description = description;
 	}
 
-	public void setStatus(final WorkItemStatus status)
+	public WorkItem setStatus(final WorkItemStatus status)
 	{
 		this.status = status;
+		return this;
 	}
 
 	@Override

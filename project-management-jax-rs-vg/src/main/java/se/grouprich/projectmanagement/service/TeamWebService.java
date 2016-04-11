@@ -18,7 +18,7 @@ import java.util.Collection;
 @Path("/team")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class TeamWebService
+public final class TeamWebService
 {
 	private static final TeamService teamService = Loader.getBean(TeamService.class);
 	private static final UserService userService = Loader.getBean(UserService.class);
