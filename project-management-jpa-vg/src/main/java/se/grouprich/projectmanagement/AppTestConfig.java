@@ -23,7 +23,7 @@ public class AppTestConfig extends AppConfig
 		HikariConfig config = new HikariConfig();
 
 		config.setDriverClassName("org.h2.Driver");
-		config.setJdbcUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=0");
+		config.setJdbcUrl("jdbc:h2:mem:test");
 		config.setUsername("sa");
 		config.setPassword("");
 		config.addDataSourceProperty("characterEncoding", "utf8");
