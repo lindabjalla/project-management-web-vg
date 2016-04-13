@@ -9,8 +9,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import se.grouprich.projectmanagement.AppTestConfig;
 import se.grouprich.projectmanagement.Loader;
+import se.grouprich.projectmanagement.TestConfig;
 import se.grouprich.projectmanagement.model.Team;
 import se.grouprich.projectmanagement.model.User;
 import se.grouprich.projectmanagement.model.WorkItem;
@@ -29,7 +29,7 @@ import static org.junit.Assert.assertThat;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppTestConfig.class)
+@ContextConfiguration(classes = TestConfig.class)
 @Sql(statements = "DROP ALL OBJECTS", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 public final class WorkItemWebServiceTest extends JerseyTest
 {

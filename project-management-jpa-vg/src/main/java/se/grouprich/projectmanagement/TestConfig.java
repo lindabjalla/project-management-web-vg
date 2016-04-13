@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories("se.grouprich.projectmanagement.repository")
 @EnableTransactionManagement
-public class AppTestConfig extends AppConfig
+public class TestConfig extends AppConfig
 {
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource()
