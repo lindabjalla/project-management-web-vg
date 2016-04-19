@@ -44,8 +44,8 @@ public final class WorkItemWebService
 	@Path("{id}")
 	public Response getWorkItem(@PathParam("id") final Long id) throws RepositoryException
 	{
-		WorkItemData workItemData = workItemService.findById(id);
-		WorkItem workItem = workItemMapper.convertWorkItemDataToWorkItem(workItemData);
+		final WorkItemData workItemData = workItemService.findById(id);
+		final WorkItem workItem = workItemMapper.convertWorkItemDataToWorkItem(workItemData);
 
 		return Response.ok(workItem).build();
 	}
